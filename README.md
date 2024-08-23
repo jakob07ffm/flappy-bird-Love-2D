@@ -12,4 +12,4 @@ This is a simple Flappy Bird clone made using the Love2D game framework.
 **Space** Makes the bird jump
 **R** Restart
 
-![](flappy_screenshot.JPG)
+![](flippy_screenshot.JPG)
