@@ -1,5 +1,3 @@
-local push = require 'push'
-
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 VIRTUAL_WIDTH = 512
@@ -23,9 +21,7 @@ local gameState = 'play'
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
-    love.window.setTitle('Flappy Bird')
-
-    push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+    love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = false,
         vsync = true
@@ -82,14 +78,12 @@ function love.update(dt)
 end
 
 function love.draw()
-    push:start()
+    love.graphics.clear(0.5, 0.8, 1)
 
-    love.graphics.clear(0.5, 0.8, 1)  -- Sky blue background
-
-    love.graphics.setColor(1, 1, 0)  -- Yellow bird
+    love.graphics.setColor(1, 1, 0)
     love.graphics.rectangle('fill', birdX, birdY, BIRD_WIDTH, BIRD_HEIGHT)
 
-    love.graphics.setColor(0.4, 0.8, 0.4)  -- Green pipes
+    love.graphics.setColor(0.4, 0.8, 0.4)
     for _, pipe in pairs(pipes) do
         love.graphics.rectangle('fill', pipe.x, pipe.y, PIPE_WIDTH, VIRTUAL_HEIGHT - pipe.y)
         love.graphics.rectangle('fill', pipe.x, 0, PIPE_WIDTH, pipe.y - PIPE_GAP)
@@ -103,8 +97,6 @@ function love.draw()
         love.graphics.setFont(largeFont)
         love.graphics.printf('Game Over! Press R to Restart', 0, VIRTUAL_HEIGHT / 2 - 14, VIRTUAL_WIDTH, 'center')
     end
-
-    push:finish()
 end
 
 function resetGame()
